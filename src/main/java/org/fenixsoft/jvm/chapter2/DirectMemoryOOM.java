@@ -22,3 +22,8 @@ public class DirectMemoryOOM {
         }
     }
 }
+/*
+Exception in thread "main" java.lang.OutOfMemoryError
+	at sun.misc.Unsafe.allocateMemory(Native Method)
+	at org.fenixsoft.jvm.chapter2.DirectMemoryOOM.main(DirectMemoryOOM.java:21)
+ */
