@@ -16,6 +16,7 @@ public class ClassLoaderTest {
 
     public static void main(String[] args) throws Exception {
 
+        //匿名内部类
         ClassLoader myLoader = new ClassLoader() {
             @Override
             public Class<?> loadClass(String name) throws ClassNotFoundException {
@@ -38,5 +39,7 @@ public class ClassLoaderTest {
 
         System.out.println(obj.getClass());
         System.out.println(obj instanceof org.fenixsoft.jvm.chapter7.ClassLoaderTest);
+
+        System.out.println(Object.class.getClassLoader());
     }
 }

@@ -48,3 +48,8 @@ public class FinalizeEscapeGC {
         FinalizeEscapeGC.SAVE_HOOK = this;
     }
 }
+/*
+finalize method executed!
+yes, i am still alive :)
+no, i am dead :(
+ */

@@ -1,5 +1,7 @@
 package org.fenixsoft.jvm.chapter9;
 
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.lang.reflect.Method;
 
 /**
@@ -20,7 +22,7 @@ public class JavaclassExecuter {
     public static String execute(byte[] classByte) {
         HackSystem.clearBuffer();
         ClassModifier cm = new ClassModifier(classByte);
-        byte[] modiBytes = cm.modifyUTF8Constant("java/lang/System", "org/fenixsoft/classloading/execute/HackSystem");
+        byte[] modiBytes = cm.modifyUTF8Constant("java/lang/System", "org/fenixsoft/jvm/chapter9/HackSystem");
         HotSwapClassLoader loader = new HotSwapClassLoader();
         Class clazz = loader.loadByte(modiBytes);
         try {
@@ -30,5 +32,17 @@ public class JavaclassExecuter {
             e.printStackTrace(HackSystem.out);
         }
         return HackSystem.getBufferString();
+    }
+
+    public static void main(String[] args) throws Exception {
+//        String name = "org.fenixsoft.jvm.chapter9.DynamicProxyTest";//有内部类，不是一个Class了，实在要弄，再掏一层Jar包吧。
+        String name = "org.fenixsoft.jvm.chapter9.HelloWorld";
+        String fileName = name.substring(name.lastIndexOf(".") + 1) + ".class";
+//        InputStream is = new FileInputStream(fileName);
+        InputStream is = JavaclassExecuter.class.getResourceAsStream(fileName);
+        byte[] b = new byte[is.available()];
+        is.read(b);
+        is.close();
+        System.out.println(JavaclassExecuter.execute(b));
     }
 }
