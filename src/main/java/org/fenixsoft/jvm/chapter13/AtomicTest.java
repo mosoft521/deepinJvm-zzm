@@ -30,10 +30,13 @@ public class AtomicTest {
             threads[i].start();
         }
 
-        while (Thread.activeCount() > 1)
-            Thread.yield();
+//        while(Thread.activeCount() > 1) //Intellij IDEA除了main方法的主线程外还有，还多了一个预期外的 Monitor Ctrl-Break线程
+        while(Thread.activeCount() > 2)
+            Thread.yield();//阻塞？
 
         System.out.println(race);
     }
 }
-
+/* Output:
+200000
+ */
